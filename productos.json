@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "nombre": "Funda de silicona",
+    "precio": 5000
+  },
+  {
+    "id": 2,
+    "nombre": "Funda de cuero",
+    "precio": 10000
+  }
+]

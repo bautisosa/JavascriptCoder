@@ -3,19 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FundaShop</title>
+  <title>Tienda de Fundas</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Librería externa: reemplaza alert (cumple consigna) -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <div class="container">
-    <h1>Tienda de Fundas</h1>
-    <p>Seleccioná tu modelo</p>
+    <h1>Tienda de Fundas para iPhone 13</h1>
+    <p>Seleccioná tu modelo y cantidad</p>
 
-    
-    <div id="form"></div>
+    <form>
+      <label for="producto">Elegí tu funda:</label>
+      <select id="producto">
+        <option value="">Cargando productos...</option>
+      </select>
 
-    
-    <div id="resultado"></div>
+      <label for="cantidad">Cantidad:</label>
+      <input type="number" id="cantidad" value="1" min="1" />
+
+      <button type="button" onclick="calcular()">Calcular total</button>
+    </form>
+
+    <section id="resultado"></section>
   </div>
 
   <script src="app.js"></script>
