@@ -1,33 +1,51 @@
-// Precios
-const FUNDA_SILICONA = 5000;
-const FUNDA_CUERO = 10000;
 
-// Pregunto qué producto quiere
-let producto = prompt("¿Qué funda querés comprar?\n1 - Funda de silicona ($5000)\n2 - Funda de cuero ($10000)");
+const productos = [
+  { id: 1, nombre: "Funda de silicona", precio: 5000 },
+  { id: 2, nombre: "Funda de cuero", precio: 10000 }
+];
 
-// Pregunto cuántas unidades quiere
-let cantidad = prompt("¿Cuántas fundas querés comprar?");
 
-// Convierto cantidad a número
-cantidad = Number(cantidad);
+function cargarForm() {
+  const form = document.getElementById("form");
+  form.innerHTML = `
+    <label for="producto">Modelo:</label>
+    <select id="producto">
+      <option value="">Elegí una opción</option>
+      ${productos.map(p => `<option value="${p.id}">${p.nombre} - $${p.precio}</option>`).join('')}
+    </select>
 
-// Variable para guardar el total
-let total = 0;
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" value="1" min="1">
 
-// Según la opción que elija, calculo el total con switch
-switch (producto) {
-  case "1":
-    total = FUNDA_SILICONA * cantidad;
-    alert("Elegiste fundas de silicona.\nTotal: $" + total);
-    console.log("Elegiste fundas de silicona. Total: $" + total);
-    break;
-  case "2":
-    total = FUNDA_CUERO * cantidad;
-    alert("Elegiste fundas de cuero.\nTotal: $" + total);
-    console.log("Elegiste fundas de cuero. Total: $" + total);
-    break;
-  default:
-    alert("Opción inválida.");
-    console.log("El usuario ingresó una opción inválida.");
-    break;
+    <button onclick="calcular()">Calcular total</button>
+  `;
 }
+
+
+function calcular() {
+  const id = document.getElementById("producto").value;
+  const cantidad = Number(document.getElementById("cantidad").value);
+  const resultado = document.getElementById("resultado");
+
+ 
+  if (!id || isNaN(cantidad) || cantidad < 1) {
+    alert("Por favor, completá bien los datos.");
+    return;
+  }
+
+  
+  const prod = productos.find(p => p.id == id);
+  if (!prod) return;
+
+  const total = prod.precio * cantidad;
+
+  resultado.style.display = "block";
+  resultado.innerHTML = `
+    <p><strong>Producto:</strong> ${prod.nombre}</p>
+    <p><strong>Cantidad:</strong> ${cantidad}</p>
+    <p><strong>Total:</strong> $${total}</p>
+  `;
+}
+
+
+document.addEventListener("DOMContentLoaded", cargarForm);
